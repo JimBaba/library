@@ -1,21 +1,15 @@
-:root {
-    background-color: rgb(100,50,250);
-    --grid-cols: 1;
-    --grid-rows: 1;
-}
+
 
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 40px;
 }
 
-.book-container {
-    display: flex;
+#book-container {
+    display: grid;
     background-color: aqua;
-    grid-template-columns: repeat(var(--grid-cols), 50px);
-    grid-template-rows: repeat(var(--grid-rows), 50px);
-    width: 600px;
-    height: 400px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
 }
 
 #btn {
@@ -24,16 +18,6 @@ h1 {
     color:black;
     font-weight: bold;
     background-color:forestgreen;
-}
-
-#book {
-    grid-row: row1;
-    grid-column: book;
-    border: solid black;
-}
-
-#descrip {
-    grid-row: row1;
-    grid-column: description;
-    border: solid black;
+    border-radius: 50px;
+    border-style: solid;
 }
