@@ -1,15 +1,20 @@
-
+body {
+    background-color: rgb(52, 95, 163) ;
+}
 
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(245, 243, 225);
     font-size: 40px;
+    background-color: rgb(45, 84, 122);
+    padding: 1.5em;
 }
 
 #book-container {
     display: grid;
-    background-color: aqua;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(1, 1fr);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #btn {
@@ -24,6 +29,7 @@ h1 {
 
 #newBook {
     display: grid;
-    background-color:bisque;
     margin: 10px;
+    padding: 1.5em;
+    
 }

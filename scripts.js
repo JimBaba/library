@@ -48,11 +48,14 @@ function addToLibrary(book) {
 // display books with delete and read buttons
 
 function showBooks() { 
+        delAll();
     for(let i = 0; i < myLibrary.length; i++ ){
         let cell = document.createElement("div");
         cell.style.setProperty("grid-column", 1)
         cell.style.setProperty("border", "solid black");
         cell.style.setProperty("margin", "5px")
+        cell.style.setProperty("padding", "1em")
+        cell.style.setProperty("background-color", "rgb(69, 201, 245)")
         cell.innerText = myLibrary[i].info();
         container.appendChild(cell).id = "book" + i;
         makeBtnDel(i);
@@ -113,28 +116,28 @@ function createForm() {
     let title = document.createElement("input")
     title.setAttribute("type", "text")
     title.setAttribute("name", "booktitle")
-    title.setAttribute("placeholder", "Book Title")
+    title.setAttribute("placeholder", "Buchtitel")
     form.appendChild(title)
     form.appendChild(br.cloneNode());
 
     let author = document.createElement("input")
     author.setAttribute("type", "text")
     author.setAttribute("name", "author")
-    author.setAttribute("placeholder", "Author")
+    author.setAttribute("placeholder", "Autor")
     form.appendChild(author)
     form.appendChild(br.cloneNode())
 
     let pages = document.createElement("input")
     pages.setAttribute("type", "text")
     pages.setAttribute("name", "amountPages")
-    pages.setAttribute("placeholder", "Number of Pages")
+    pages.setAttribute("placeholder", "Seitenzahl")
     form.appendChild(pages)
     form.appendChild(br.cloneNode())
 
     let read = document.createElement("input")
     read.setAttribute("type", "text")
     read.setAttribute("name", "read")
-    read.setAttribute("placeholder", "Already read? true or false")
+    read.setAttribute("placeholder", "Schon gelesen? true or false")
     form.appendChild(read)
     form.appendChild(br.cloneNode())
 
