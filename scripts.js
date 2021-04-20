@@ -2,6 +2,8 @@ const container = document.getElementById("book-container")
 const br = document.createElement("br")
 const formCont = document.getElementById("newBook")
 
+// Book object Prototype
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -26,6 +28,8 @@ function Book(title, author, pages, read) {
     
 }
 
+// some books to fill the myLibrary array
+
 const dreiSonnen = new Book("Die Drei Sonnen", "Cixin Liu", 689, true)
 
 const urknall = new Book("Urknall, Weltall und das Leben", "Professor Harald Lesch", 356, false)
@@ -34,20 +38,14 @@ const akira = new Book("AKIRA", "Katsuhiro Otomo", 478, true)
 
 const myLibrary = [dreiSonnen, urknall, akira];
 
+// function to manually add new books to the myLibrary array
 
 function addToLibrary(book) {
     myLibrary.push(book)
     return book + " added to myLibrary"
 }
 
-function newBook(){
-    let title = prompt("Enter title");
-    let author = prompt("Enter author");
-    let pages = prompt("How many pages?");
-    let read = prompt("Did you read it? (true or false)")
-    let newBook = new Book(title, author, pages, read)
-    myLibrary.push(newBook);
-}
+// display books with delete and read buttons
 
 function showBooks() { 
     for(let i = 0; i < myLibrary.length; i++ ){
@@ -60,16 +58,9 @@ function showBooks() {
         makeBtnDel(i);
         makeBtnRead(i);
     }
-    // loops through myLibrary and 
-    // display the books (titles?) on the website
-    // how to display them? grid? divs?
 }
 
-// add button NEW BOOk which opens a form to enter new books 
-
-// add button to remove individual books from myLibrary from the display
-
-
+// function that deletes single library entries
 
 function makeBtnDel(i) {
     let delBtn = document.createElement("input");
@@ -91,6 +82,9 @@ function makeBtnDel(i) {
     container.appendChild(delBtn).id = "btnDel" + i;
 }
 
+// function that adds a button to change the read status. when hit, it changes the
+// read status via the book prototype
+
 function makeBtnRead(i) {
     let readBtn = document.createElement("input");
     readBtn.style.setProperty("grid-column", 3);
@@ -101,61 +95,74 @@ function makeBtnRead(i) {
     readBtn.value = "Read";
     readBtn.onclick = function() {
         delAll();
-        console.log("delete all")
         myLibrary[i].switchRead()
         console.log(myLibrary[i].info() + " " + myLibrary[i].read)
         showBooks();
-        console.log("show new")
     }
     container.appendChild(readBtn).id = "readBtn" + i;
     
 }
 
+// create a form to add books
+
 function createForm() {
     let form = document.createElement("form");
-    form.setAttribute("method", "post")
-    form.setAttribute("action", "submit.php")
     form.id = "formBook";
+    form.className = "bookForm"
+
     let title = document.createElement("input")
     title.setAttribute("type", "text")
     title.setAttribute("name", "booktitle")
     title.setAttribute("placeholder", "Book Title")
     form.appendChild(title)
     form.appendChild(br.cloneNode());
+
     let author = document.createElement("input")
     author.setAttribute("type", "text")
     author.setAttribute("name", "author")
     author.setAttribute("placeholder", "Author")
     form.appendChild(author)
     form.appendChild(br.cloneNode())
+
     let pages = document.createElement("input")
     pages.setAttribute("type", "text")
     pages.setAttribute("name", "amountPages")
-    pages.setAttribute("placeholder", "Amount of Pages")
+    pages.setAttribute("placeholder", "Number of Pages")
     form.appendChild(pages)
     form.appendChild(br.cloneNode())
+
     let read = document.createElement("input")
     read.setAttribute("type", "text")
     read.setAttribute("name", "read")
     read.setAttribute("placeholder", "Already read? true or false")
     form.appendChild(read)
     form.appendChild(br.cloneNode())
+
     let submit = document.createElement("input")
     submit.setAttribute("type", "submit")
     submit.setAttribute("value", "submit")
-    submit.onclick = function() {
-        // addToLibrary(new Book(nForm.elements[0].value, nForm.elements[1].value,
-        //    nForm.elements[2].value, nForm.elements[3].value))
-        console.log("onclick works")
+    submit.onclick = function(e) {
+        const formID = document.querySelectorAll(".bookForm")
+        e.preventDefault();
+        bookFromForm(formID[0][0].value, formID[0][1].value, formID[0][2].value, formID[0][3].value);
+        delAll();
+        showBooks();
     }
+
     form.appendChild(submit)
     form.appendChild(br.cloneNode());
     formCont.appendChild(form)
-    let nForm = document.getElementById("formBook")
 }
+
+// function that deletes all shown books (only display, not array contents)
 
 function delAll() {
     container.innerHTML = ""
 }
 
+// function that adds new books via the form, function is part of submit button onclick()
 
+function bookFromForm(title, author, pages, read){
+    myLibrary.push(new Book(title, author, pages, read))
+
+}
